@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 	//测试提交
 	//转向欢迎页面
-	@RequestMapping("/home")
+	@RequestMapping("/home.action")
 	public String home(){
-		return "/home/fmain";
+		return "/index1";
 	}
 	
 	//转向tilte标题栏页面
