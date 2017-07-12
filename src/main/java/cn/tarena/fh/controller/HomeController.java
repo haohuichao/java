@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class HomeController {
-	//测试提交
+	//测试fz
 	//转向欢迎页面
 	@RequestMapping("/home")
 	public String home(){
