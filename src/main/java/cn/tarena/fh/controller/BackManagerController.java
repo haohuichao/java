@@ -19,6 +19,7 @@ public class BackManagerController {
 	public String to_left(){
 		return "/backend/_left";
 	}
+	
 	@RequestMapping("/backend/_right")
 	public String to_right(){
 		return "/backend/_right";

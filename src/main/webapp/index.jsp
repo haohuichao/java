@@ -9,6 +9,6 @@
 </script>
 
 <body>
-123456
+
 </body>
 </html>

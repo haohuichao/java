@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tarena.fh.mapper.RoleMapper">
+    
+<!--     <sql id="insertColum">
+           #{createBy,jdbcType=VARCHAR},
+		   #{createTime,jdbcType=DATE},
+		   #{updateBy,jdbcType=VARCHAR},
+		   #{updateTime,jdbcType=DATE} 
+    </sql> -->
+    
+    
+    <select id="findAll" resultType="Role">
+        select * from role_d order by role_level
+    </select>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   <!--  
+    <delete id="deleteRoles" > param可不加 
+       delete from role_p where role_id in(       
+           <foreach collection="array" item="roleId" separator=",">
+               #{roleId}
+           </foreach>
+       )
+    </delete>
+    
+    也可以采用  动态插入
+    <insert id="saveRole">
+        insert into role_p values(
+           #{roleId},
+           #{name},
+           #{remarks},
+           #{orderNo},
+           <include refid="insertColum"></include>
+        )
+    </insert>
+    
+    
+    动态更新操作 角色，一旦做了新建和修改操作，就可将角色的这两数据更新至数据库，也可实现回显和日期的查看
+    <update id="updateRole">
+        update role_p 
+		<set>
+			name = #{name},
+			remarks = #{remarks},
+			order_no = #{orderNo},
+			<if test="createBy !=null">create_by = #{createBy,jdbcType=VARCHAR},</if>
+			<if test="createDept !=null">create_dept = #{createDept,jdbcType=VARCHAR},</if>
+			<if test="createTime !=null">create_time = #{createTime,jdbcType=DATE},</if>
+			<if test="updateBy !=null">update_by = #{updateBy,jdbcType=VARCHAR},</if>
+			<if test="updateTime !=null">update_time = #{updateTime,jdbcType=DATE}</if>
+		</set>
+        where role_id = #{roleId}
+            
+    </update>
+    <update id="updateRole">
+        update role_p set
+            name = #{name},
+            order_no = #{orderNo},
+            remarks = #{remarks},
+            create_by = #{createBy,jdbcType=VARCHAR},
+            create_dept = #{createDept,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=DATE},
+            update_by = #{updateBy,jdbcType=VARCHAR},
+            update_time = #{updateTime,jdbcType=DATE}
+        where role_id = #{roleId}
+            
+    </update> -->
+    
+    
+</mapper>
+
+
+
+
+
+
+
+
+
+

@@ -49,7 +49,7 @@
 			<div><a href="${ctx }/backend/user/bUserList" target="rightFrame">> 用户管理</a></div>
 			<div><a href="${ctx }/backend/prod_list.jsp" target="rightFrame">> 计划管理</a></div>
 			<div><a href="${ctx }/backend/prod_list.jsp" target="rightFrame">> 统计管理</a></div>
-			<div><a href="${ctx}/backend/role/list" onclick="linkHighlighted(this)"  target="rightFrame">> 角色管理</a></div>
+			<div><a href="${ctx }/backend/role/bRoleList" target="rightFrame">> 角色管理</a></div>
 		</div>		
 	</body>
 </html>
