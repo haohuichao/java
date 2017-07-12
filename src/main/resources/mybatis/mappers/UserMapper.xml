@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tarena.fh.mapper.UserMapper">
+    
+ 
+    <!-- 查找所有用户 -->
+    <select id="findAll" resultMap="UserMp">
+    	select * from 
+				user_d u
+		left join 
+				(select USER_INFO_ID, REALNAME, GENDER, CARD_NO, BIRTHDAY,PHONE_NO,ADRESS_D, USER_ICON from user_info_d) info
+		on u.user_d_id= info.user_info_id;
+    </select>
+    
+    <resultMap type="User" id="UserMp" autoMapping="true">
+    	<id column="user_d_id" property="userDId"/>
+    	
+    	<association property="userInfo" javaType="UserInfo">
+    		<id column="user_info_id" property="userInfoId"/>
+    		<result column="realname" property="realname"/> 
+    		<result column="gender" property="gender"/> 
+    		<result column="card_no" property="cardNo"/> 
+    		<result column="birthday" property="birthday"/> 
+    		<result column="phone_No" property="phoneNo"/> 
+    		<result column="adress_d" property="adressd"/> 
+    		<result column="user_Icon" property="userIcon"/> 
+    	</association>
+    	
+    </resultMap>
+ 
+    
+    <!-- 更改状态 -->
+    <update id="updateUserState">
+	 	update user_d set user_state=#{userState} where user_d_id in 
+		(
+			<foreach collection="userDIds" item="userDId" separator=",">
+				#{userDId}
+			</foreach>			
+		)
+	 </update>
+    
+    <!--删除用户-->
+    <delete id="deleteUser">
+		 delete from user_d where user_d_id in (
+			<foreach collection="array" item="userDId" separator=",">
+				#{userDId}
+			</foreach>	
+		)
+	 </delete>
+    
+    <!--  -->
+    <select id="findOne" resultMap="UserMp">
+    	select * from 
+				(select * from user_d where user_d_id = #{userDId}) u
+		left join 
+				(select USER_INFO_ID, REALNAME, GENDER, CARD_NO, BIRTHDAY,PHONE_NO,ADRESS_D, USER_ICON from user_info_d) info
+		on u.user_d_id= info.user_info_id;
+    </select>
+    
+    <!--保存用户  -->
+     <insert id="saveUser">
+	 		insert into user_d values 
+			(
+			#{userDId}, 
+			#{userName},
+			#{userPassword},
+			#{userState},
+			#{createBy,jdbcType=VARCHAR},
+			#{createTime,jdbcType=DATE},
+			#{updateTime,jdbcType=DATE},
+			#{updateBy,jdbcType=VARCHAR}
+			)
+	 </insert>
+	  
+    <!--  -->
+    
+    
+    <!--  -->
+    
+    
+    
+    <!--  -->
+    
+  
+    
+  
+</mapper>
+
+
+
+
+
+
+
+
+
+

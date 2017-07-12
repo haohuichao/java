@@ -1,150 +1,78 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
-<!DOCTYPE HTML>
-<html>
+<%@ include file="../base.jsp" %>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>商品管理</title>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<style type="text/css">
-body {
-	font-family: "微软雅黑";
-	background-color: #EDEDED;
-}
-
-h2 {
-	text-align: center;
-}
-
-table {
-	margin: 0 auto;
-	/* width: 96%; */
-	text-align: center;
-	border-collapse: collapse;
-}
-
-td,th {
-	padding: 7px;
-}
-
-th {
-	background-color: #DCDCDC;
-}
-
-th.ths {
-	width: 100px;
-}
-
-input.pnum {
-	width: 80px;
-	height: 25px;
-	font-size: 18px;
-	text-align: center;
-}
-</style>
-
-<!--引入jquery的js库-->
-<script src="${ctx }/js/jquery-1.4.2.js"></script>
-<script type="text/javascript">
-	$(function(){
-		 var $pnumObj=$(".pnum");
-		 	//绑定失去焦点事件
-		 $pnumObj.blur(function(){
-		 		//当前商品的 value值
-		 		var pnum=$(this).val();
-		 	
-		 		//id在下面遍历的时候，保存在了 input 的id中，
-		 		var pid=$(this).attr("id");
-				//获取相邻的 input
-				var $odPnumOjb = $(this).next();
-				var odPnum=$odPnumOjb.val();
-			
-			 	var reg=/^0$|^[1-9][0-9]*$/;
-			 	
-			 	if (pnum!=odPnum) {
-					if (reg.test(pnum)) {
-						var _selt=this;
-						
-						$.post("${app}/BackProdPnumEditServlet" , {"pnum":pnum , "pid":pid} , function(result){
-							if (result) {
-								alert("ok");
-								//更新旧值
-								$odPnumOjb.val(pnum);
-							}else {
-								alert("数值不合法");
-								//恢复库存数量
-								//$(this).val(odPnum);  这样写当前this不是指向input 而是 ajax对象
-								$(_selt).val(odPnum)
-							}
-						});		
-					}else{	
-						alert("请输入合法数值");
-						$(this).val(odPnum);
-					}
-				}
-		 });
-		 //为删除超链接绑定点击事件 。点击删除商品
-		 $(".del").click(function(){
-		 	 
-		 	var _self=this;
-		 	if(confirm("确定删除该商品吗?")){  //确定 返回true		取消，返回false
-		 		//获取商品id
-		 		var pid=$(this).parents("tr").find(".pnum").attr("id");
-		 	
-		 		$.post("${app}/BackProdDelServlet",{"pid":pid},function(result){
-		 			if ("true"==result) {
-						alert("删除成功");
-						//删除当前商品tr
-						$(_self).parents("tr").remove();
-						
-					}else{
-					
-						alert("删除失败");
-					}
-		 		});
-		 	}
-		 		
-		 });
-		 
-	});
-	
-	
-	
-	
-</script>
+	<title>用户列表</title>
 </head>
 <body>
-	<h2>商品管理</h2>
-	<table border="1">
-		<tr>
-			<th>商品图片</th>
-			<th width="200px">商品ID</th>
-			<th class="ths">商品名称</th>
-			<th class="ths">商品种类</th>
-			<th class="ths">商品单价</th>
-			<th class="ths">库存数量</th>
-			<th>描述信息</th>
-			<th width="50px">操 作</th>
-		</tr>
+<form name="icform" method="post">
 
-		<!-- 模版数据 -->
+<div id="menubar">
+<div id="middleMenubar">
+<div id="innerMenubar">
+  <div id="navMenubar">
+<ul>
+	<li id="view"><a href="#" onclick="formSubmit('toview','_self');this.blur();">查看</a></li>
+	<li id="new"><a href="#" onclick="formSubmit('tocreate','_self');this.blur();">新增</a></li>
+	<li id="update"><a href="#" onclick="formSubmit('toupdate','_self');this.blur();">修改</a></li>
+	<li id="delete"><a href="#" onclick="formSubmit('delete','_self');this.blur();">删除</a></li>
+	<li id="new"><a href="#" onclick="formSubmit('start','_self');this.blur();">启用</a></li>
+	<li id="new"><a href="#" onclick="formSubmit('stop','_self');this.blur();">停用</a></li>
+	<li id="new"><a href="#" onclick="formSubmit('role','_self');this.blur();">角色</a></li>
+</ul>
+  </div>
+</div>
+</div>
+</div>
+   
+  <div class="textbox-title">
+	<img src="../../staticfile/skin/default/images/icon/currency_yen.png"/>
+    用户列表
+  </div> 
+  
+<div>
+
+
+<div class="eXtremeTable" >
+<table id="ec_table" class="tableRegion" width="98%" >
+	<thead>
+	<tr>
+		<td class="tableHeader"><input type="checkbox" name="selid" onclick="checkAll('userDId',this)"></td>
+		<td class="tableHeader">序号</td>
+		<td class="tableHeader">用户名</td>
+		<td class="tableHeader">真实姓名</td>
+		<td class="tableHeader">性别</td>
+		<td class="tableHeader">生日</td>
+		<td class="tableHeader">状态</td>
+	</tr>
+	</thead>
+	<tbody class="tableBody" >
+	
+	<c:forEach items="${userList}" var="u" varStatus="status">
+	<tr class="odd" onmouseover="this.className='highlight'" onmouseout="this.className='odd'">
+		<td><input type="checkbox" name="userDId" value="${u.userDId}"/></td>
+		<td>${status.index+1}</td>
+		<td>${u.userName}</td>
+		<td>${u.userInfo.realname}</td>
+		<td>${u.userInfo.gender}</td>
 		
-			<tr>
-				<td><img width="120px" height="120px" src="${ctx }/ProdImgervlet?imgurl=" alt="">
-				</td>
-				<td> </td>
-			 
-				<td><input type="text" id=" " class="pnum" value=" " />
-					<input type="hidden" value=" " >
-				</td>
-				<td><a class="del" href="javascript:void(0)" >删 除</a>
-				</td>
-			</tr>
-		 
-		 
-	</table>
+		<td><fmt:formatDate value="${u.userInfo.birthday}" pattern="yyyy-MM-dd"/></td>
+		<td>
+			<c:if test="${u.userState==1}"><a href="stop?userDId=${u.userDId}"><font color="green">启用</font></a></c:if>
+			<c:if test="${u.userState==0}"><a href="start?userDId=${u.userDId}"><font color="red">停用</font></a></c:if>
+		</td>
+	</tr>
+	</c:forEach>
+	 
+	</tbody>
+</table>
+</div>
+ 
+</div>
+ 
+ 
+</form>
 </body>
 </html>
-
-
 

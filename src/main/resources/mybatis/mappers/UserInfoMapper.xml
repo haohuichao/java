@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tarena.fh.mapper.UserInfoMapper">
+    
+ 
+    
+    <!--删除userinfo-->
+    <delete id="deleteUserInfo">
+		 delete from user_info_d where user_info_id in (
+			<foreach collection="array" item="userDId" separator=",">
+				#{userDId}
+			</foreach>	
+		)
+	 </delete>
+    
+    <!-- 添加userinfo -->
+    <insert id="saveUserInfo">
+    	insert into user_info_d values 
+    	(
+    		#{userInfoId},
+    		#{realname},
+    		#{gender},
+    		#{cardNo},
+    		#{birthday},
+    		#{phoneNo},
+    		#{adressd},
+    		#{createBy,jdbcType=VARCHAR},
+			#{createTime,jdbcType=DATE},
+			#{updateBy,jdbcType=VARCHAR},
+			#{updateTime,jdbcType=DATE},
+    		#{userIcon}
+    	)
+    	
+    </insert>
+    
+    <!--  -->
+    
+    
+    <!--  -->
+    
+    
+    <!--  -->
+    
+    
+    
+    <!--  -->
+    
+  
+    
+  
+</mapper>
+
+
+
+
+
+
+
+
+
+

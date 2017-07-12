@@ -24,4 +24,6 @@ public class BackManagerController {
 	public String to_right(){
 		return "/backend/_right";
 	}
+	
+	
 }

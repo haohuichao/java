@@ -1,10 +1,13 @@
 package cn.tarena.fh.pojo;
+import java.io.Serializable;
 /*
  *公共实体类
  */
 import java.util.Date;
 
-public class BaseEntity {
+@SuppressWarnings("serial")
+public class BaseEntity implements Serializable{
+	
 	private String createBy;
 	private Date createTime;
 	private String updateBy;

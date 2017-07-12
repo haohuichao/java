@@ -1,5 +1,6 @@
 package cn.tarena.fh.pojo;
 
+@SuppressWarnings("serial")
 public class Role extends BaseEntity{
 	private String roleId;
 	private String roleName;//角色名称
