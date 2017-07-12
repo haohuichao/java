@@ -20,7 +20,7 @@ a{
 
 body{
 	font:62.5%/1.5 "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
-	background:url(images/background4.jpg) center top no-repeat;
+	background:url(../images/background4.jpg) center top no-repeat;
 	background-attachment:fixed;
 	background-size:cover;
 	-moz-background-size:cover;
@@ -29,7 +29,7 @@ body{
 }
 
 #bodypat{
-	background:url(images/bg_pattern.png) repeat;
+	background:url(../images/bg_pattern.png) repeat;
 }
 #container{
 	max-width:960px;
@@ -2277,7 +2277,7 @@ footer #footer-social{
 .tumblr-mini,
 .twitter-mini,
 .vimeo-mini{
-	background:url(images/social-mini.png) no-repeat;
+	background:url(../images/social-mini.png) no-repeat;
 	width:30px;
 	height:30px;
 	margin-right:0;
@@ -3104,7 +3104,7 @@ Theme Preview Demo Only
 	left:0;
 }
 #colorchanger h4{
-	background:url(images/right.png) no-repeat 212px 7px #000;
+	background:url(../images/right.png) no-repeat 212px 7px #000;
 	color:#fff;
 	padding-right:40px;
 }
